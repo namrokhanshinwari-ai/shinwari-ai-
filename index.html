@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ps">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shinwari AI Chat</title>
+<title>Shinwari AI</title>
+
 <style>
 body{
 margin:0;
@@ -53,16 +54,17 @@ border-radius:8px;
 }
 </style>
 </head>
+
 <body>
 
-<header>🤖 Shinwari AI Chat</header>
+<header>🤖 Shinwari AI</header>
 
 <div id="chat">
 <div class="msg">سلام! Shinwari AI ته ښه راغلاست.</div>
 </div>
 
 <footer>
-<input id="text" placeholder="پیغام ولیکئ...">
+<input id="text" placeholder="خپل پیغام ولیکئ...">
 <button onclick="send()">Send</button>
 </footer>
 
@@ -70,9 +72,15 @@ border-radius:8px;
 function send(){
 let input=document.getElementById("text");
 let chat=document.getElementById("chat");
+
 if(input.value=="") return;
+
 chat.innerHTML += "<div class='msg'>👤 "+input.value+"</div>";
-chat.innerHTML += "<div class='msg'>🤖 AI به وروسته دلته ځواب درکړي.</div>";
+
+let reply="زه Shinwari AI یم. ستا پیغام مې ترلاسه کړ.";
+
+chat.innerHTML += "<div class='msg'>🤖 "+reply+"</div>";
+
 input.value="";
 chat.scrollTop=chat.scrollHeight;
 }
