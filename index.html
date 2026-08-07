@@ -1,58 +1,84 @@
 <!DOCTYPE html>
 <html lang="ps">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shinwari AI</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shinwari AI</title>
 
-<style>
+  <style>
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#111827;
-color:white;
-display:flex;
-flex-direction:column;
-height:100vh;
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#0f172a;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  height:100vh;
 }
+
 header{
-background:#2563eb;
-padding:15px;
-text-align:center;
-font-size:24px;
-font-weight:bold;
+  background:linear-gradient(90deg,#2563eb,#7c3aed);
+  padding:16px;
+  text-align:center;
+  font-size:24px;
+  font-weight:bold;
+  box-shadow:0 2px 10px rgba(0,0,0,.4);
 }
+
 #chat{
-flex:1;
-padding:15px;
-overflow:auto;
+  flex:1;
+  overflow:auto;
+  padding:15px;
 }
+
 .msg{
-background:#1f2937;
-padding:10px;
-margin:10px 0;
-border-radius:10px;
+  background:#1e293b;
+  padding:12px;
+  margin:10px 0;
+  border-radius:12px;
+  line-height:1.5;
 }
+
+.user{
+  background:#2563eb;
+  text-align:right;
+}
+
+.ai{
+  background:#1e293b;
+}
+
 footer{
-display:flex;
-padding:10px;
-background:#1f2937;
+  display:flex;
+  gap:10px;
+  padding:12px;
+  background:#111827;
 }
+
 input{
-flex:1;
-padding:10px;
-border:none;
-border-radius:8px;
+  flex:1;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  outline:none;
+  font-size:16px;
 }
+
 button{
-margin-left:10px;
-padding:10px 20px;
-background:#2563eb;
-color:white;
-border:none;
-border-radius:8px;
+  background:#2563eb;
+  color:#fff;
+  border:none;
+  border-radius:10px;
+  padding:12px 18px;
+  font-size:18px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#1d4ed8;
 }
 </style>
+
 </head>
 
 <body>
@@ -60,30 +86,64 @@ border-radius:8px;
 <header>🤖 Shinwari AI</header>
 
 <div id="chat">
-<div class="msg">سلام! Shinwari AI ته ښه راغلاست.</div>
+  <div class="msg ai">
+    سلام! Shinwari AI ته ښه راغلاست. 😊
+  </div>
 </div>
 
 <footer>
-<input id="text" placeholder="خپل پیغام ولیکئ...">
-<button onclick="send()">Send</button>
+  <input id="text" type="text" placeholder="خپل پیغام ولیکئ...">
+  <button onclick="send()">➤</button>
 </footer>
 
 <script>
 function send(){
-let input=document.getElementById("text");
-let chat=document.getElementById("chat");
 
-if(input.value=="") return;
+  let input = document.getElementById("text");
+  let chat = document.getElementById("chat");
 
-chat.innerHTML += "<div class='msg'>👤 "+input.value+"</div>";
+  if(input.value.trim() === ""){
+    return;
+  }
 
-let reply="زه Shinwari AI یم. ستا پیغام مې ترلاسه کړ.";
+  // د کارونکي پیغام
+  chat.innerHTML += `
+    <div class="msg user">
+      👤 ${input.value}
+    </div>
+  `;
 
-chat.innerHTML += "<div class='msg'>🤖 "+reply+"</div>";
+  // AI د لیکلو پیغام
+  chat.innerHTML += `
+    <div class="msg ai" id="typing">
+      🤖 Shinwari AI لیکي...
+    </div>
+  `;
 
-input.value="";
-chat.scrollTop=chat.scrollHeight;
+  chat.scrollTop = chat.scrollHeight;
+
+  let userMessage = input.value;
+  input.value = "";
+
+  setTimeout(function(){
+
+    document.getElementById("typing").remove();
+
+    let reply = "ستا پیغام ترلاسه شو: " + userMessage + " 😊\n\nدا د Shinwari AI د جوړېدو لومړنۍ نسخه ده. ډېر ژر به اصلي AI هم ورسره وصل شي.";
+
+    chat.innerHTML += `
+      <div class="msg ai">
+        🤖 ${reply}
+      </div>
+    `;
+
+    chat.scrollTop = chat.scrollHeight;
+
+  },1000);
+
 }
+
 </script>
+
 </body>
 </html> 
